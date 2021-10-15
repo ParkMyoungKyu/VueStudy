@@ -1,15 +1,36 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div v-for="item in rooms" :key="item">
+    <h4 :style="roomStyle">{{ item.roomName }} 원룸</h4>
+    <p :style="priceStyle">{{ item.price }} 만원</p>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
+  data(){
+    return {
+      roomStyle : 'color:blue',
+      priceStyle : 'color:red',
+      rooms : [
+        {
+          roomName : '갯마을',
+          price : 50
+        },
+        {
+          roomName : '차차차',
+          price : 70
+        },
+        {
+          roomName : '오징어',
+          price : 30
+        },
+      ]
+    }
+  },
   components: {
-    HelloWorld
   }
 }
 </script>
