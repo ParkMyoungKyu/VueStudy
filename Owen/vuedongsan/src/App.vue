@@ -1,19 +1,36 @@
 <template>
 
+
+
+    <div class="black-bg" v-if="모달창열렸니==true">
+      <div class="white-bg">
+        <h4>상세페이지임</h4>
+        <p>상세페이지내용임</p>
+        <button @click="모달창열렸니=false">닫기</button>
+      </div>
+    </div>
+
+
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
+
+
+
   <div>
-    <h4>{{ items[0] }}</h4>
+    <img src="./images/room0.jpg" class="room-img">
+    <h4 @click="모달창열렸니 = true">{{ items[0] }}</h4>
     <p>{{ price[0] }} 만원</p>
     <button @click="increase">허위매물신고</button><span>신고수 : {{신고수}}</span>
   </div>
   <div>
+    <img src="./images/room1.jpg" class="room-img">
     <h4>{{ items[1] }}</h4>
     <p>{{ price[1] }} 만원</p>
     <button @click="increase1">허위매물신고</button><span>신고수 : {{신고수1}}</span>
   </div>
   <div>
+    <img src="./images/room2.jpg" class="room-img">
     <h4>{{ items[2] }}</h4>
     <p>{{ price[2] }} 만원</p>
     <button @click="increase2">허위매물신고</button><span>신고수 : {{신고수2}}</span>
@@ -28,6 +45,7 @@ export default {
   data(){
     return {
       //데이터 보관함
+      모달창열렸니 : false,
       신고수 : 0,
       신고수1 : 0,
       신고수2 : 0,
@@ -54,6 +72,24 @@ export default {
 </script>
 
 <style>
+body {
+  margin: 0;
+}
+div {
+  box-sizing: border-box;
+}
+.black-bg {
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  position: fixed;
+  padding: 20px;
+}
+.white-bg {
+  width:  100%; background: white;
+  border-radius: 8px;
+  padding: 20px;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -71,4 +107,11 @@ export default {
   color:  white;
   padding: 10px;
 }
+
+.room-img {
+  width: 100%;
+  margin-top: 40px;
+}
+
+
 </style>
