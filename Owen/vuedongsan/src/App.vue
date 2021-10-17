@@ -17,34 +17,23 @@
 
 
 
-  <div>
-    <img src="./images/room0.jpg" class="room-img">
-    <h4 @click="모달창열렸니 = true">{{ items[0] }}</h4>
-    <p>{{ price[0] }} 만원</p>
-    <button @click="increase">허위매물신고</button><span>신고수 : {{신고수}}</span>
+  <div v-for="(oneroom, k) in onerooms" :key="k">
+    <img :src="oneroom.image" class="room-img">
+    <h4>{{ oneroom.title }}</h4>
+    <p>{{ oneroom.price }} 만원</p>
   </div>
-  <div>
-    <img src="./images/room1.jpg" class="room-img">
-    <h4>{{ items[1] }}</h4>
-    <p>{{ price[1] }} 만원</p>
-    <button @click="increase1">허위매물신고</button><span>신고수 : {{신고수1}}</span>
-  </div>
-  <div>
-    <img src="./images/room2.jpg" class="room-img">
-    <h4>{{ items[2] }}</h4>
-    <p>{{ price[2] }} 만원</p>
-    <button @click="increase2">허위매물신고</button><span>신고수 : {{신고수2}}</span>
-  </div>
+
 </template>
 
 <script>
-
+import data from './assets/oneroom.js';
 
 export default {
   name: 'App',
   data(){
     return {
       //데이터 보관함
+      onerooms : data,
       모달창열렸니 : false,
       신고수 : 0,
       신고수1 : 0,
