@@ -3,9 +3,20 @@
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
-  <div v-for="(item, j) in items" :key="j">
-    <h4 class="red" :style="스타일">{{ item }}</h4>
-    <p>{{ price[j] }} 만원</p>
+  <div>
+    <h4>{{ items[0] }}</h4>
+    <p>{{ price[0] }} 만원</p>
+    <button @click="increase">허위매물신고</button><span>신고수 : {{신고수}}</span>
+  </div>
+  <div>
+    <h4>{{ items[1] }}</h4>
+    <p>{{ price[1] }} 만원</p>
+    <button @click="increase1">허위매물신고</button><span>신고수 : {{신고수1}}</span>
+  </div>
+  <div>
+    <h4>{{ items[2] }}</h4>
+    <p>{{ price[2] }} 만원</p>
+    <button @click="increase2">허위매물신고</button><span>신고수 : {{신고수2}}</span>
   </div>
 </template>
 
@@ -17,10 +28,24 @@ export default {
   data(){
     return {
       //데이터 보관함
+      신고수 : 0,
+      신고수1 : 0,
+      신고수2 : 0,
       스타일 : 'color:blue',
       menus : ['Home', 'Shop', 'About'],
       items : ['역삼동원룸', '천호동원룸', '마포구원룸'],
       price : ['50', '60', '70']
+    }
+  },
+  methods : {
+    increase(){
+      this.신고수 += 1;
+    },
+    increase1(){
+      this.신고수1 += 1;
+    },
+    increase2(){
+      this.신고수2 += 1;
     }
   },
   components: {
