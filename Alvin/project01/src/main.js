@@ -1,4 +1,9 @@
 import { createApp } from 'vue'
-import App from './App.vue'
+// import App from './App.vue'
+// createApp(App).mount('#app')
+//
+// import Vfor from './Vfor.vue'
+// createApp(Vfor).mount('#Vfor')
 
-createApp(App).mount('#app')
+import Event from './Event.vue'
+createApp(Event).mount('#event')
