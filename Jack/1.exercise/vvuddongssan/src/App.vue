@@ -1,8 +1,9 @@
 <template>
   <div class="black-bg" v-if="isVisibleModal">
     <div class="white-bg">
-      <h4>상세페이지</h4>
-      <p>상세페이지내용임</p>
+      <img :src="selectedItem.image" class="roomImg">
+      <h4>{{ selectedItem.title }}</h4>
+      <p>{{ selectedItem.content }}</p>
       <button @click="hideDetail">닫기</button>
     </div>
   </div>
@@ -32,6 +33,7 @@ export default {
       isVisibleModal : false,
       roomStyle : 'color:blue',
       priceStyle : 'color:red',
+      selectedItem : {},
       rooms : roomList
     }
   },
@@ -42,6 +44,7 @@ export default {
     showDetail(item){
       console.log("hahahah " + item.roomName);
       this.isVisibleModal = true;
+      this.selectedItem = item;
     },
     hideDetail(){
       this.isVisibleModal = false;
@@ -60,6 +63,10 @@ body {
 div {
   box-sizing: border-box;
 }
+h2{
+  text-decoration-line: underline;
+}
+
 img.roomImg {
   width: 500px;
 }
