@@ -12,16 +12,18 @@
     <a>About</a>
   </div>
   <div v-for="(item,i) in rooms" :key="i">
-    <img :src="item.roomImg"  class="roomImg">
-    <h4 :style="roomStyle" @click="showDetail(item)">{{ item.roomName }} 원룸</h4>
-    <p :style="priceStyle">{{ item.price }} 만원</p>
-    <button @click="increaseAccusedCnt(item)">신고하기</button>
-    <span>신고수 : {{ item.accusedCnt }}</span>
+    <img :src="item.image"  class="roomImg">
+    <h2 :style="roomStyle" @click="showDetail(item)">{{ item.title }}</h2>
+    <h4>{{item.content}}</h4>
+    <p :style="priceStyle">{{ item.price }} 원</p>
     <p></p>
   </div>
 </template>
 
 <script>
+
+import roomList from './assets/data/roomlist';
+
 
 export default {
   name: 'App',
@@ -30,26 +32,7 @@ export default {
       isVisibleModal : false,
       roomStyle : 'color:blue',
       priceStyle : 'color:red',
-      rooms : [
-        {
-          roomImg : require('./assets/room0.jpg'),
-          roomName : '갯마을',
-          price : 50,
-          accusedCnt : 0
-        },
-        {
-          roomImg : require('./assets/room1.jpg'),
-          roomName : '차차차',
-          price : 70,
-          accusedCnt : 0
-        },
-        {
-          roomImg : require('./assets/room2.jpg'),
-          roomName : '오징어',
-          price : 30,
-          accusedCnt : 0
-        },
-      ]
+      rooms : roomList
     }
   },
   methods:{
