@@ -11,7 +11,7 @@
   </div>
   <div v-for="(a,i) in products" :key="i">
     <img :src="a.image" class="room-img"/>
-    <h4 @click="popModal=true;selItem=i;">{{a.title}}</h4>
+    <h4 @click="selectModal(i)">{{a.title}}</h4>
     <p>{{ a.price}}원 </p>
   </div>
 </template>
@@ -27,6 +27,12 @@ export default {
       sin_cnt : [0,0,0],
       menuList : ['Home', 'Products', "About"],
       products : data,
+    }
+  },
+  methods : {
+    selectModal : function (tId) {
+      this.selItem = tId;
+      this.popModal = true;
     }
   },
   components: {
@@ -55,8 +61,6 @@ div {
   width:100%;
   margin-top: 40px;
 }
-
-
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
