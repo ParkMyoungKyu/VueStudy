@@ -3,8 +3,11 @@
     <div class="black-bg" v-if="modalOpenFlag">
       <div class="white-bg">
         <h4>원룸 상세 정보</h4>
-        <p>상세페이지내용임</p>
-        <button class="modal-close-btn" @click="modalViewSwitch()">닫기</button>
+        <p>{{ roomData[roomId].title }}</p>
+        <img :src="roomData[roomId].image" alt="X"/>
+        <p>{{ roomData[roomId].content }}</p>
+        <p>{{ roomData[roomId].price }}</p>
+        <button class="modal-close-btn" @click="modalViewSwitch(roomId)">닫기</button>
       </div>
     </div>
   </div>
@@ -15,8 +18,7 @@
   <div class="content">
     <div v-for="(obj, i) in roomData" :key="i">
       <img :src="obj.image" alt="X"/>
-      <button @click="modalViewSwitch()">상세</button>
-      <h4>{{ obj.title }}</h4>
+      <h4 @click="modalViewSwitch(i)">{{ obj.title }}</h4>
       <p>{{ obj.content }}</p>
       <p>{{ obj.price }}</p>
       <button @click="increase(obj)">허위매물신고</button>
@@ -33,30 +35,32 @@ export default {
   name: 'App6',
   data() {
     return {
-      testCnt: 0,
-
+      // 메뉴 명
       menus: ["Home", "Shop", "About"],
       // 원룸 상세정보 리스트
       roomData: data,
       // 신고 횟수
       reportCnt : [0, 0, 0, 0, 0, 0],
       // 이미지
-      roomImagesURL: [require("./assets/images/room0.jpg"), require("./assets/images/room1.jpg"), require("./assets/images/room2.jpg")],
+      //roomImagesURL: [require("./assets/images/room0.jpg"), require("./assets/images/room1.jpg"), require("./assets/images/room2.jpg")],
       // 모달창 on off 상태
       modalOpenFlag : false,
+      roomId : 0,
+      // 상세페이지
 
     }
   },
   methods: {
+    // 허위사례신고 카운터
     increase(obj) {
       obj.reportCnt++;
     },
-    modalViewSwitch() {
-      if (this.modalOpenFlag === true) {
-        return this.modalOpenFlag = false;
-      } else {
-        return this.modalOpenFlag = true;
-      }
+    // 모달 창 view 제어
+    modalViewSwitch(id) {
+      this.modalOpenFlag = !this.modalOpenFlag;
+      this.roomId = id;
+      console.log(this.roomId);
+      return this.modalOpenFlag;
     }
   },
   components: {
