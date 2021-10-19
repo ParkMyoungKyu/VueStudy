@@ -2,9 +2,9 @@
   <div class="modal">
     <div class="black-bg" v-if="modalOpenFlag === true">
       <div class="white-bg">
-        <h4>상세페이지</h4>
+        <h4>원룸 상세 정보</h4>
         <p>상세페이지내용임</p>
-        <button class="modal-close-btn" @click="modalClose()">닫기</button>
+        <button class="modal-close-btn" @click="modalViewSwitch()">닫기</button>
       </div>
     </div>
   </div>
@@ -13,10 +13,12 @@
     <a v-for="(menuList, i) in menus" :key="i">{{ menuList }}</a>
   </div>
   <div class="content">
-    <div v-for="(productList, i) in rooms" :key="i">
-      <img :src="roomImagesURL[i]" alt="X"/>
-      <h4>{{ productList.name }}</h4>
-      <p>{{ productList.price }}</p>
+    <div v-for="(dataList, i) in roomData" :key="i">
+      <img :src="roomData[i].image" alt="X"/>
+      <button @click="modalViewSwitch()">상세</button>
+      <h4>{{ roomData[i].title }}</h4>
+      <p>{{ roomData[i].content }}</p>
+      <p>{{ roomData[i].price }}</p>
       <button @click="increase(i)">허위매물신고</button>
       <span>신고수 : {{ reportCnt[i] }}</span>
     </div>
@@ -25,21 +27,28 @@
 
 <script>
 
+import data from './assets/js/oneroom.js';
+
 export default {
-  name: 'App5',
+  name: 'App6',
   data() {
     return {
+      menus: ["Home", "Shop", "About"],
+      // 원룸 상세정보 리스트
       rooms: [
         { name: "역삼동 원룸", price: "50만원"},
         { name: "천호동 원룸", price: "100만원"},
         { name: "마포구 원룸", price: "200만원"},
       ],
-      menus: ["Home", "Shop", "About"],
-      reportCnt : [0, 0, 0],
+
+      //
+      roomData: data,
+      // 신고 횟수
+      reportCnt : [0, 0, 0, 0, 0, 0],
       // 이미지
       roomImagesURL: [require("./assets/images/room0.jpg"), require("./assets/images/room1.jpg"), require("./assets/images/room2.jpg")],
       // 모달창 on off 상태
-      modalOpenFlag : true,
+      modalOpenFlag : false,
 
     }
   },
@@ -47,7 +56,7 @@ export default {
     increase(i) {
       return this.reportCnt[i] += 1
     },
-    modalClose() {
+    modalViewSwitch() {
       if (this.modalOpenFlag === true) {
         return this.modalOpenFlag = false;
       } else {
@@ -96,6 +105,6 @@ div {
   padding: 20px;
 }
 .modal-close-btn {
-  background: firebrick;
+  background: red;
 }
 </style>
