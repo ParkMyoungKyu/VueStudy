@@ -2,8 +2,10 @@
 
   <div class="black-bg" v-if="modalchang == true">
     <div class="white-bg">
-      <h4>상세페이지임</h4>
-      <p>상세페이지 내용</p>
+      <h4>{{ oneroominfo[pushNum].title }}</h4>
+      <img :src="oneroominfo[pushNum].image" class="room-img"/>
+      <p>{{ oneroominfo[pushNum].content }}</p>
+      <p>{{ oneroominfo[pushNum].price }} 원</p>
       <button v-on:click="modalchang = false">닫기</button>
     </div>
   </div>
@@ -17,18 +19,20 @@
     <h4>{{ oneroominfo[0].title }}</h4>
     <p> {{ oneroominfo[0].price }} 원</p>
   </div> -->
-  
-  <div v-for="(oneroominfo,i) in roominfo" :key="oneroominfo">
-    <img :src="roominfo[i].image" class="room-img">
-    <h4>{{ roominfo[i].title }}</h4>
-    <p> {{ roominfo[i].price }} 원</p>
-  </div>
+
+<!--  <div v-for="(oneroominfo,i) in roominfo" :key="oneroominfo">-->
+<!--    <img :src="roominfo[i].image" class="room-img">-->
+<!--    <h4>{{ roominfo[i].title }}</h4>-->
+<!--    <p> {{ roominfo[i].price }} 원</p>-->
+<!--  </div>-->
 
   <div v-for="(roominfo,i) in oneroominfo" :key="i">
     <img :src="roominfo.image" class="room-img">
-    <h4>{{ roominfo.title }}</h4>
+    <h4 v-on:click ="modalchang = true; pushNum = i" >{{ roominfo.title }}</h4>
     <p> {{ roominfo.price }} 원</p>
   </div>
+
+
 </template>
 
 <script>
@@ -39,10 +43,6 @@ export default {
   name: 'App',
   data(){
     return{
-      name : {name01 : '항동하버라인 10단지', name02 : '항동하버라인 9단지', name03 : '항동하버라인 8단지'},
-      price : {price01 : 100, price02 : 150, price03 : 200},
-      style : {style01 : 'color : red', style02 : 'color : green', style03 : 'color : #00b8ff'},
-      className : { name01 : 'class01'},
       products :['역삼동원룸','천호동원룸','마포구원룸'],
 
       menus : ['Home', 'Shop', 'About'],
@@ -50,6 +50,8 @@ export default {
       singoNum : [0,0,0],
       modalchang : false,
       oneroominfo : data,
+
+      pushData : 0,
     }
   },
   methods:{
