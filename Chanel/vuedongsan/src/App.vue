@@ -1,8 +1,8 @@
 <template>
   <div class="black-bg" v-if="popModal == true">
     <div class="white-bg">
-      <h4>{{ products[selItem].title }}</h4>
-      <p>{{ products[selItem].content }}</p>
+      <h4>{{ d_title }}</h4>
+      <p>{{ d_content }}</p>
       <button @click="popModal=false;">닫기</button>
     </div>
   </div>
@@ -17,11 +17,14 @@
 </template>
 
 <script>
+import axios from 'axios';
 import data from './assets/data/oneroom.js';
 export default {
   name: 'App',
   data() {
     return {
+      d_title : '',
+      d_content : '',
       selItem : 0,
       popModal : false,
       sin_cnt : [0,0,0],
@@ -30,7 +33,17 @@ export default {
     }
   },
   methods : {
-    selectModal : function (tId) {
+    selectModal : async function (tid) {
+      try {
+        const response = await axios.get('/test');
+        this.d_title = response.data[tid].title;
+        this.d_content = response.data[tid].content;
+        this.popModal = true;
+      } catch (err) {
+        alert("에러~ 다시 시도!");
+      }
+    },
+    selectModal2 : function (tId) {
       this.selItem = tId;
       this.popModal = true;
     }
