@@ -1,23 +1,17 @@
 <template>
-  <div class="black-bg" v-if="popModal == true">
-    <div class="white-bg">
-      <h4>{{ products[selItem].title }}</h4>
-      <p>{{ products[selItem].content }}</p>
-      <button @click="popModal=false;">닫기</button>
-    </div>
-  </div>
+  <Modal :product="products[selItem]" :popModal="popModal" @closeModal="popModal=$event;"/>
   <div class="menu">
     <a v-for="menu in menuList" :key="menu">{{menu}}</a>
   </div>
-  <div v-for="(a,i) in products" :key="i">
-    <img :src="a.image" class="room-img"/>
-    <h4 @click="selectModal(i)">{{a.title}}</h4>
-    <p>{{ a.price}}원 </p>
-  </div>
+  <Discount/>
+  <Card  v-for="(a,i) in products" :key="a" :product="products[i]" @openModal="selectModal(i)"/>
 </template>
 
 <script>
-import data from './assets/data/oneroom.js';
+import data     from './assets/data/oneroom.js';
+import Discount from "./Discount";
+import Modal    from "./Modal";
+import Card     from "./Card";
 export default {
   name: 'App',
   data() {
@@ -36,6 +30,9 @@ export default {
     }
   },
   components: {
+    Card,
+    Modal,
+    Discount : Discount,
   }
 }
 </script>
