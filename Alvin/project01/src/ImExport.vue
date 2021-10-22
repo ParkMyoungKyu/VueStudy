@@ -2,8 +2,8 @@
 
   <div class="black-bg" v-if="modalchang == true">
     <div class="white-bg">
-      <h4>{{ oneroominfo[pushNum].title }}</h4>
       <img :src="oneroominfo[pushNum].image" class="room-img"/>
+      <h4>{{ oneroominfo[pushNum].title }}</h4>
       <p>{{ oneroominfo[pushNum].content }}</p>
       <p>{{ oneroominfo[pushNum].price }} 원</p>
       <button v-on:click="modalchang = false">닫기</button>
@@ -13,6 +13,8 @@
   <div class="menu">
     <a v-for="menulist in menus" :key="menulist">{{ menulist }}</a><br>
   </div>
+
+  <Discount/>
 
   <!-- <div>
     <img :src="oneroominfo[0].image" class="room-img">
@@ -38,6 +40,7 @@
 <script>
 
 import data from './assets/oneroom.js';
+import discount from './components/Discount.vue';
 
 export default {
   name: 'App',
@@ -60,9 +63,8 @@ export default {
     },
 
   },
-
   components:{
-
+    Discount : discount,
   }
 }
 </script>
@@ -75,6 +77,14 @@ body {
 div {
   box-sizing : border-box;
 }
+
+.discount{
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
 .black-bg{
   width: 100%;
   height: 100%;
@@ -90,7 +100,7 @@ div {
   padding: 20px;
 }
 .room-img{
-  width: 100%;
+  width: 50%;
   margin-top: 40px;
 }
 #ImExport {
