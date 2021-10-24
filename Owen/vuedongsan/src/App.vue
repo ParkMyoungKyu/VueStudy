@@ -1,5 +1,4 @@
 <template>
-
   <div v-if="1 == 1">
     안녕하세요
   </div>
@@ -15,14 +14,9 @@
         <button @click="모달창열렸니=false">닫기</button>
       </div>
     </div>
-
-
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
-
-
-
   <div v-for="(oneroom, k) in onerooms" :key="k">
     <img :src="oneroom.image" class="room-img">
     <h4 @click="모달창열렸니 = true; inputTitle = k">{{ oneroom.title }}</h4>
