@@ -5,7 +5,7 @@
     <img :src="roomdetaildata.image" alt="X"/>
     <p>{{ roomdetaildata.content }}</p>
     <p>{{ roomdetaildata.price }}</p>
-<!--    <button class="modal-close-btn" @click="modalViewSwitch()">닫기</button>-->
+    <button class="modal-close-btn" @click="$emit('close-modal')">닫기</button>
   </div>
 </template>
 

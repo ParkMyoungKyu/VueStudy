@@ -3,8 +3,8 @@
   <!-- Modal Start -->
   <div class="modal">
     <div class="black-bg" v-if="modalOpenFlag">
-      <roomDetailModal :roomdetaildata="selectedRoomObject" />
-      <button class="modal-close-btn" @click="modalViewSwitch()">닫기</button>
+      <roomDetailModal @close-modal="modalViewSwitch" :roomdetaildata="selectedRoomObject" />
+<!--      <button class="modal-close-btn" @click="modalViewSwitch()">닫기</button>-->
     </div>
   </div>
 
@@ -36,8 +36,8 @@
 <script>
 
 import data from './assets/js/oneroom.js';
-import roomDetailModal from './components/app9-modal.vue';
-import appContents from './components/app9-contents.vue';
+import roomDetailModal from './components/app10-modal.vue';
+import appContents from './components/app10-contents.vue';
 
 export default {
   name: 'App10',

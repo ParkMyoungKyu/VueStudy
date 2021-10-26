@@ -3,10 +3,12 @@
     <img :src="obj.image" alt="X"/>
     <!-- Custom Event Send -->
 <!--    <h4 @click="callOpenModal(obj)">{{ obj.title }}</h4>-->
+<!--    <h4 @click="$emit('open-modal', obj)">{{ obj.title }}</h4>-->
     <h4 @click="$emit('open-modal', obj)">{{ obj.title }}</h4>
     <p>{{ obj.content }}</p>
     <p>{{ obj.price }}</p>
 <!--    <button @click="callIncrease(obj)">허위매물신고</button>-->
+<!--    <button @click="$emit('report-cnt', obj)">허위매물신고</button>-->
     <button @click="$emit('report-cnt', obj)">허위매물신고</button>
     <span>신고수 : {{ obj.reportCnt }}</span>
   </div>
