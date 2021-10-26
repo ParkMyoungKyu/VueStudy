@@ -14,12 +14,12 @@
 
 <script>
 export default {
-  name: "app9-contents",
+  name: "app10-contents",
   props : {
     card : Object
   },
   methods : {
-    // 부모로 Object 전달
+    // 부모로 Object 전달 (함수로 뺀 emit)
     callOpenModal(obj) {
       this.$emit("open-modal", obj);
     },

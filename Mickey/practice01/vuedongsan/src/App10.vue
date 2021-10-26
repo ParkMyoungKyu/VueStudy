@@ -1,3 +1,4 @@
+<!-- Custom Event 추가해보기 -->
 <template>
   <!-- Modal Start -->
   <div class="modal">
@@ -18,16 +19,16 @@
   <!-- Content Start -->
   <div class="content">
     <appContents @open-modal="modalViewSwitch" @report-cnt="increase" :card="roomData" />
-<!--
-    <div v-for="(obj, i) in roomData" :key="i">
-      <img :src="obj.image" alt="X"/>
-      <h4 @click="modalViewSwitch(obj)">{{ obj.title }}</h4>
-      <p>{{ obj.content }}</p>
-      <p>{{ obj.price }}</p>
-      <button @click="increase(obj)">허위매물신고</button>
-      <span>신고수 : {{ obj.reportCnt }}</span>
-    </div>
--->
+    <!--
+        <div v-for="(obj, i) in roomData" :key="i">
+          <img :src="obj.image" alt="X"/>
+          <h4 @click="modalViewSwitch(obj)">{{ obj.title }}</h4>
+          <p>{{ obj.content }}</p>
+          <p>{{ obj.price }}</p>
+          <button @click="increase(obj)">허위매물신고</button>
+          <span>신고수 : {{ obj.reportCnt }}</span>
+        </div>
+    -->
   </div>
   <!-- Content End -->
 </template>
@@ -39,7 +40,7 @@ import roomDetailModal from './components/app9-modal.vue';
 import appContents from './components/app9-contents.vue';
 
 export default {
-  name: 'App9',
+  name: 'App10',
   data() {
     return {
       // 메뉴 명
