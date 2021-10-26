@@ -1,64 +1,61 @@
 <template>
+  <!-- Modal Start -->
   <div class="modal">
     <div class="black-bg" v-if="modalOpenFlag">
-      <div class="white-bg">
-        <h4>원룸 상세 정보</h4>
-        <p>상세페이지내용임</p>
-        <button class="modal-close-btn" @click="modalViewSwitch()">닫기</button>
-      </div>
+      <roomDetailModal :roomdetaildata="selectedRoomObject" />
+      <button class="modal-close-btn" @click="modalViewSwitch()">닫기</button>
     </div>
   </div>
 
+  <!-- Modal End -->
+
+  <!-- Menu Start -->
   <div class="menu">
     <a v-for="(menuList, i) in menus" :key="i">{{ menuList }}</a>
   </div>
+  <!-- Menu End -->
+
+  <!-- Content Start -->
   <div class="content">
-    <div v-for="(obj, i) in roomData" :key="i">
-      <img :src="obj.image" alt="X"/>
-      <button @click="modalViewSwitch()">상세</button>
-      <h4>{{ obj.title }}</h4>
-      <p>{{ obj.content }}</p>
-      <p>{{ obj.price }}</p>
-      <button @click="increase(obj)">허위매물신고</button>
-      <span>신고수 : {{ obj.reportCnt }}</span>
-    </div>
+    <appContents :card="roomData" />
   </div>
+  <!-- Content End -->
 </template>
 
 <script>
 
 import data from './assets/js/oneroom.js';
+import roomDetailModal from './components/app9-modal.vue';
+import appContents from './components/app9-contents.vue';
 
 export default {
-  name: 'App6',
+  name: 'App9',
   data() {
     return {
+      // 메뉴 명
       menus: ["Home", "Shop", "About"],
       // 원룸 상세정보 리스트
       roomData: data,
-      // 신고 횟수
       reportCnt : [0, 0, 0, 0, 0, 0],
-      // 이미지
-      roomImagesURL: [require("./assets/images/room0.jpg"), require("./assets/images/room1.jpg"), require("./assets/images/room2.jpg")],
-      // 모달창 on off 상태
       modalOpenFlag : false,
-
+      selectedRoomObject : {},
     }
   },
   methods: {
+    // 허위사례신고 카운터
     increase(obj) {
       obj.reportCnt++;
     },
-    modalViewSwitch() {
-      if (this.modalOpenFlag === true) {
-        return this.modalOpenFlag = false;
-      } else {
-        return this.modalOpenFlag = true;
-      }
+    // 모달 창 view 제어
+    modalViewSwitch(obj) {
+      this.modalOpenFlag = !this.modalOpenFlag;
+      this.selectedRoomObject = obj;
+      return this.modalOpenFlag;
     }
   },
   components: {
-
+    roomDetailModal,
+    appContents
   }
 }
 </script>
