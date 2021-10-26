@@ -2,17 +2,12 @@
   "name": "vuedongsan",
   "version": "0.1.0",
   "private": true,
-  "description": "",
-  "author": "",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
-  "main": "babel.config.js",
   "dependencies": {
-    "@vue/cli": "^4.5.14",
-    "axios": "^0.23.0",
     "core-js": "^3.6.5",
     "vue": "^3.0.0"
   },
@@ -23,8 +18,7 @@
     "@vue/compiler-sfc": "^3.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0",
-    "webpack": "^4.5.0"
+    "eslint-plugin-vue": "^7.0.0"
   },
   "eslintConfig": {
     "root": true,
@@ -44,8 +38,5 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ],
-  "_id": "vuedongsan@0.1.0",
-  "license": "ISC",
-  "readme": "ERROR: No README data found!"
+  ]
 }

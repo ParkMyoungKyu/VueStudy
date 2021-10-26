@@ -1,25 +1,25 @@
 <template>
-
-
+  <div v-if="1 == 1">
+    안녕하세요
+  </div>
+  <div v-else>
+    안녕하세요2
+  </div>
 
     <div class="black-bg" v-if="모달창열렸니==true">
       <div class="white-bg">
-        <h4>상세페이지임</h4>
-        <p>상세페이지내용임</p>
+        <h4>{{ onerooms[inputTitle].title }}</h4>
+        <p>{{ onerooms[inputTitle].content }}</p>
+        <p>{{ onerooms[inputTitle].price }}만원</p>
         <button @click="모달창열렸니=false">닫기</button>
       </div>
     </div>
-
-
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
-
-
-
   <div v-for="(oneroom, k) in onerooms" :key="k">
     <img :src="oneroom.image" class="room-img">
-    <h4>{{ oneroom.title }}</h4>
+    <h4 @click="모달창열렸니 = true; inputTitle = k">{{ oneroom.title }}</h4>
     <p>{{ oneroom.price }} 만원</p>
   </div>
 
@@ -33,6 +33,7 @@ export default {
   data(){
     return {
       //데이터 보관함
+      inputTitle : 0,
       onerooms : data,
       모달창열렸니 : false,
       신고수 : 0,
