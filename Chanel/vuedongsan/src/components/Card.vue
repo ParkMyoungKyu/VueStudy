@@ -1,8 +1,9 @@
 <template>
   <div>
-    <img :src="product.image" class="room-img"/>
+<!--    <img :src="product.image" class="room-img"/>-->
     <h4 @click="send">{{product.title}}</h4>
-    <p>{{ product.price}}원 부터</p>
+    <p>{{ monIn }}개월 </p>
+    <p>{{ product.price * monIn }}원 </p>
   </div>
 </template>
 
@@ -11,6 +12,7 @@ export default {
   name : 'Card',
   props : {
     product : Object,
+    monIn : Number,
   },
   methods : {
     send : function () {

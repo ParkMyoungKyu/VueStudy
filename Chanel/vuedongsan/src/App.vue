@@ -1,21 +1,25 @@
 <template>
   <Modal :product="products[selItem]" :popModal="popModal" @closeModal="popModal=$event;"/>
+  <base-input v-model="inputText" ></base-input>
   <div class="menu">
     <a v-for="menu in menuList" :key="menu">{{menu}}</a>
   </div>
-  <Discount/>
-  <Card  v-for="(a,i) in products" :key="a" :product="products[i]" @openModal="selectModal(i)"/>
+  <Discount />
+  <Card  v-for="(a,i) in products" :key="a" :product="products[i]" :monIn="inputText" @openModal="selectModal(i)"/>
 </template>
 
 <script>
 import data     from './assets/data/oneroom.js';
-import Discount from "./Discount";
-import Modal    from "./Modal";
-import Card     from "./Card";
+import Discount from "./components/Discount";
+import Modal    from "./components/Modal";
+import Card     from "./components/Card";
+import MonInput from "./components/MonInput";
+
 export default {
   name: 'App',
   data() {
     return {
+      inputText : 1,
       selItem : 0,
       popModal : false,
       sin_cnt : [0,0,0],
@@ -27,9 +31,10 @@ export default {
     selectModal : function (tId) {
       this.selItem = tId;
       this.popModal = true;
-    }
+    },
   },
   components: {
+    'base-input' : MonInput,
     Card,
     Modal,
     Discount : Discount,
