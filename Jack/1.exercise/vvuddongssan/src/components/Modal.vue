@@ -12,7 +12,7 @@
         <option>3</option>
         <option value="44">4</option>
       </select>
-      <p>{{month}} 개월 선택함</p> <p>{{ selectedItem.price * month }}원</p>
+      <p>{{month}} 개월 선택함</p> <p>{{ month }}원</p>
       <button @click="$emit('hideDetail')">닫기</button>
     </div>
   </div>
