@@ -10,11 +10,15 @@
 <!--    </div>-->
 <!--  </div>-->
 
+<!--  <div class="start" :class=" { end : modalchang }">-->
+  <transition name="fade">
     <Modal :oneroominfo="oneroominfo"
            :modalchang="modalchang"
            :pushNum = "pushNum"
            @closeModal="modalchang = false"
     />
+  </transition>
+<!--  </div>-->
 
   <div className="menu">
     <a v-for="menulist in menus" :key="menulist">{{ menulist }}</a><br>
@@ -87,6 +91,35 @@ export default {
 </script>
 
 <style>
+.fade-leave-from{
+  opacity: 1;
+}
+.fade-leave-active{
+  transition: all 1s;
+}
+.fade-leave-to{
+  opacity: 0;
+}
+
+.fade-enter-from{
+  opacity: 0;
+}
+.fade-enter-active{
+  transition: all 1s;
+}
+.fade-enter-to{
+  opacity: 1;
+}
+
+
+.start{
+  opacity: 0;
+  transition: all 1s;
+}
+.end{
+  opacity: 1;
+}
+
 body {
   margin: 0
 }
@@ -94,7 +127,6 @@ body {
 div {
   box-sizing: border-box;
 }
-
 .discount {
   background: #eee;
   padding: 10px;
