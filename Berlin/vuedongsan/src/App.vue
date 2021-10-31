@@ -7,22 +7,22 @@
   안녕하십니까
 </div>
 
- <Modal/>
+<transition name="fade">
+ <Modal :원룸들="원룸들" :누른거="누른거" :모달창열렸니="모달창열렸니" @closeModal="모달창열렸니 = false"/>
+</transition>
 
-  <div class="menu">
+  <div class="menu" :class="{ end : 모달창열렸니 }">
     <a v-for="(a,i) in menu" :key="i">{{ a }}</a>
   </div>
 
+  <Card @openModal="모달창열렸니 = true; 누른거=$event " :원룸="원룸들[i]" v-for="(작명, i) in 원룸들" :key="작명"/>
 
-  <Disconut/>
+  <Discount/>
 
-
-  <div v-for="(a,i) in 원룸들" :key="i">
-    <img :src = "a.image" class="room-img">
-    <h4>{{a.content}}</h4>
-    <p>>{{a.price}}원</p>
-    <button @click="모달창열렸니 = true; 누른거 = i">모달</button>
-  </div>
+<button @click="priceSort">가격순정렬</button>
+<button @click="priceReverseSort">가격역순정렬</button>
+<button @click="sortBack">되돌리기</button>
+  
 
 </template>
 
@@ -31,11 +31,13 @@
 import roomData from './assets/oneroom.js';
 import Discount from './Discount.vue';
 import Modal from './Modal';
+import Card from './Card';
 
 export default {
   name: 'App',
   data(){
     return {
+      원룸들오리지널 : [...roomData],
       누른거: 0,
       원룸들 : roomData,
       모달창열렸니 : false,
@@ -48,23 +50,45 @@ export default {
   methods : {
     increase() {
 
+    },
+    sortBack(){
+      this.웜룸들 = this.원룸들오리지널;
+    },
+    priceSort(){
+      this.원룸들.sort(function(a,b){
+        return a.price - b.price
+      })
+    },
+    priceReverseSort(){
+
     }
   },
   components: {
      Discount : Discount,
      Modal,
+     Card,
   }
 }
 </script>
 
 <style>
+.fade-enter-from {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: all 1s;
+}
+.fade-enter-to {
+  opacity: 1;
+}
+
 body {
   margin : 0;
 }
 div {
   box-sizing: border-box;
 }
-.dicount {
+.discount {
   background : #eee;
   padding : 10px;
   margin : 10px;
