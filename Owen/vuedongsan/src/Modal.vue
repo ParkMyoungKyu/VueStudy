@@ -6,11 +6,13 @@
         <p>{{ onerooms[inputTitle].content }}</p>
         <!-- <input @input="month = $event.target.value"> -->
         <input v-model.number="month">
+        <input :value="keyword" @input="changeKeyword"/>
         <!-- <textarea v-model="month"></textarea> -->
         <!-- <select v-model="month">
           <option></option>
         </select> -->
         <p> {{ month }}개월 선택함 :  {{ onerooms[inputTitle].price * month }}만원</p>
+        <p>keyword:{{ keyword }}</p>
         <button @click="send">닫기</button>
       </div>
     </div>
@@ -22,6 +24,7 @@ export default {
     data(){
       return {
         month : 1,
+        keyword:'',
       }
     },
     props :{
@@ -32,6 +35,9 @@ export default {
     methods: {
       send(){
         this.$emit('closeModal')
+      },
+      changeKeyword(e){
+        this.keyword = e.target.value
       }
     },
 }
