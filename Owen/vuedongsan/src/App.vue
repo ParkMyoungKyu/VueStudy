@@ -6,32 +6,30 @@
     안녕하세요2
   </div>
 
-    <div class="black-bg" v-if="모달창열렸니==true">
-      <div class="white-bg">
-        <h4>{{ onerooms[inputTitle].title }}</h4>
-        <p>{{ onerooms[inputTitle].content }}</p>
-        <p>{{ onerooms[inputTitle].price }}만원</p>
-        <button @click="모달창열렸니=false">닫기</button>
-      </div>
-    </div>
+    <Modal @closeModal="모달창열렸니 = false; inputTitle = $event" :onerooms="onerooms" :inputTitle="inputTitle" :모달창열렸니="모달창열렸니" />
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
-  <div v-for="(oneroom, k) in onerooms" :key="k">
-    <img :src="oneroom.image" class="room-img">
-    <h4 @click="모달창열렸니 = true; inputTitle = k">{{ oneroom.title }}</h4>
-    <p>{{ oneroom.price }} 만원</p>
-  </div>
+<Discount/>
+
+  
+<Card @openModal="모달창열렸니 = true; inputTitle = $event" :oneroom="onerooms[j]" v-for="(oneroom,j) in onerooms" :key="j"/>
+
+
 
 </template>
 
 <script>
 import data from './assets/oneroom.js';
+import Discount from './Discount.vue';
+import Modal from './Modal.vue';
+import Card from './Card.vue';
 
 export default {
   name: 'App',
   data(){
     return {
+      objects : { name : 'kim', }, 
       //데이터 보관함
       inputTitle : 0,
       onerooms : data,
@@ -57,6 +55,9 @@ export default {
     }
   },
   components: {
+    Discount : Discount,
+    Modal : Modal,
+    Card : Card,
   }
 }
 </script>
@@ -103,5 +104,11 @@ div {
   margin-top: 40px;
 }
 
+.discount {
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+}
 
 </style>
