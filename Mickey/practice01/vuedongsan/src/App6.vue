@@ -33,8 +33,6 @@ export default {
   name: 'App6',
   data() {
     return {
-      testCnt: 0,
-
       menus: ["Home", "Shop", "About"],
       // 원룸 상세정보 리스트
       roomData: data,

@@ -1,29 +1,25 @@
 <template>
-  <div class="black-bg" v-if="isVisibleModal">
-    <div class="white-bg">
-      <img :src="selectedItem.image" class="roomImg">
-      <h4>{{ selectedItem.title }}</h4>
-      <p>{{ selectedItem.content }}</p>
-      <button @click="hideDetail">닫기</button>
-    </div>
-  </div>
+
+  <Modal @hideDetail="hideDetail()" :isVisibleModal="isVisibleModal" :selectedItem="selectedItem"/>
+
   <div class="menu">
     <a>Home</a>
     <a>Product</a>
     <a>About</a>
   </div>
-  <div v-for="(item,i) in rooms" :key="i">
-    <img :src="item.image"  class="roomImg">
-    <h2 :style="roomStyle" @click="showDetail(item)">{{ item.title }}</h2>
-    <h4>{{item.content}}</h4>
-    <p :style="priceStyle">{{ item.price }} 원</p>
-    <p></p>
-  </div>
+
+  <Discount/>
+
+  <Card @showDetail="showDetail($event)" :rooms="rooms" :roomStyle="roomStyle" :priceStyle="priceStyle"/>
+
 </template>
 
 <script>
 
 import roomList from './assets/data/roomlist';
+import Discount from "@/components/Discount";
+import Modal from "@/components/Modal";
+import Card from "@/components/Card";
 
 
 export default {
@@ -42,7 +38,6 @@ export default {
       item.accusedCnt++;
     },
     showDetail(item){
-      console.log("hahahah " + item.roomName);
       this.isVisibleModal = true;
       this.selectedItem = item;
     },
@@ -51,6 +46,9 @@ export default {
     }
   },
   components: {
+    Card,
+    Modal,
+    Discount
   }
 }
 </script>
@@ -65,6 +63,7 @@ div {
 }
 h2{
   text-decoration-line: underline;
+  cursor: pointer;
 }
 
 img.roomImg {
@@ -100,5 +99,12 @@ img.roomImg {
 .menu a{
   color: white;
   padding: 10px;
+}
+
+.discount{
+  background: cadetblue;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
 }
 </style>

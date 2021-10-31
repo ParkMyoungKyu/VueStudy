@@ -10,7 +10,7 @@
 export default {
   name: "Card",
   props: {
-    oneroominfo : Array,
+    oneroominfo : Object,
   }
 }
 </script>

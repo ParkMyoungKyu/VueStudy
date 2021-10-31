@@ -3,11 +3,11 @@
     <div class="black-bg" v-if="modalOpenFlag">
       <div class="white-bg">
         <h4>원룸 상세 정보</h4>
-        <p>{{ roomData[roomId].title }}</p>
-        <img :src="roomData[roomId].image" alt="X"/>
-        <p>{{ roomData[roomId].content }}</p>
-        <p>{{ roomData[roomId].price }}</p>
-        <button class="modal-close-btn" @click="modalViewSwitch(roomId)">닫기</button>
+        <p>{{ selectedRoomObject.title }}</p>
+        <img :src="selectedRoomObject.image" alt="X"/>
+        <p>{{ selectedRoomObject.content }}</p>
+        <p>{{ selectedRoomObject.price }}</p>
+        <button class="modal-close-btn" @click="modalViewSwitch()">닫기</button>
       </div>
     </div>
   </div>
@@ -18,7 +18,7 @@
   <div class="content">
     <div v-for="(obj, i) in roomData" :key="i">
       <img :src="obj.image" alt="X"/>
-      <h4 @click="modalViewSwitch(i)">{{ obj.title }}</h4>
+      <h4 @click="modalViewSwitch(obj)">{{ obj.title }}</h4>
       <p>{{ obj.content }}</p>
       <p>{{ obj.price }}</p>
       <button @click="increase(obj)">허위매물신고</button>
@@ -32,7 +32,7 @@
 import data from './assets/js/oneroom.js';
 
 export default {
-  name: 'App6',
+  name: 'App7',
   data() {
     return {
       // 메뉴 명
@@ -45,7 +45,7 @@ export default {
       //roomImagesURL: [require("./assets/images/room0.jpg"), require("./assets/images/room1.jpg"), require("./assets/images/room2.jpg")],
       // 모달창 on off 상태
       modalOpenFlag : false,
-      roomId : 0,
+      selectedRoomObject : {},
       // 상세페이지
 
     }
@@ -56,10 +56,9 @@ export default {
       obj.reportCnt++;
     },
     // 모달 창 view 제어
-    modalViewSwitch(id) {
+    modalViewSwitch(obj) {
       this.modalOpenFlag = !this.modalOpenFlag;
-      this.roomId = id;
-      console.log(this.roomId);
+      this.selectedRoomObject = obj;
       return this.modalOpenFlag;
     }
   },
