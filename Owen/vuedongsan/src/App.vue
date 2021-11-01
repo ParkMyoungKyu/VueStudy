@@ -1,4 +1,5 @@
 <template>
+
   <div v-if="1 == 1">
     안녕하세요
   </div>
@@ -6,7 +7,9 @@
     안녕하세요2
   </div>
 
+  <transition name="fade">
     <Modal @closeModal="모달창열렸니 = false; inputTitle = $event" :onerooms="onerooms" :inputTitle="inputTitle" :모달창열렸니="모달창열렸니" />
+  </transition>
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
@@ -18,6 +21,7 @@
 
 
 </template>
+
 
 <script>
 import data from './assets/oneroom.js';
@@ -63,6 +67,26 @@ export default {
 </script>
 
 <style>
+.fade-enter-from {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: all 1s;
+}
+.fade-enter-to {
+  opacity: 1;
+}
+
+.fade-leave-from {
+  transform: translateY(0px);
+}
+.fade-leave-active {
+  transition: all 1s;
+}
+.fade-leave-to {
+  transform: translateY(-1000px);
+}
+
 body {
   margin: 0;
 }
