@@ -1,16 +1,4 @@
 <template>
-
-<!--  <div className="black-bg" v-if="modalchang == true">-->
-<!--    <div className="white-bg">-->
-<!--      <img :src="oneroominfo[pushNum].image" class="room-img"/>-->
-<!--      <h4>{{ oneroominfo[pushNum].title }}</h4>-->
-<!--      <p>{{ oneroominfo[pushNum].content }}</p>-->
-<!--      <p>{{ oneroominfo[pushNum].price }} 원</p>-->
-<!--      <button v-on:click="modalchang = false">닫기</button>-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--  <div class="start" :class=" { end : modalchang }">-->
   <transition name="fade">
     <Modal :oneroominfo="oneroominfo"
            :modalchang="modalchang"
@@ -24,41 +12,18 @@
     <a v-for="menulist in menus" :key="menulist">{{ menulist }}</a><br>
   </div>
 
-  <Discount/>
+  <Discount v-if="showDiscount == true" :discountPer = "discountPer" />
 
   <button v-on:click="priceSortLow">가격낮은순 정렬</button>
   <button v-on:click="priceSortHigh">가격높은순 정렬</button>
   <button v-on:click="textSort">가나다순 정렬</button>
   <button v-on:click="priceFillter">40만원 이상 정렬</button>
   <button v-on:click="sortBack">되돌리기</button>
-  <!-- <div>
-    <img :src="oneroominfo[0].image" class="room-img">
-    <h4>{{ oneroominfo[0].title }}</h4>
-    <p> {{ oneroominfo[0].price }} 원</p>
-  </div> -->
-
-  <!--  <div v-for="(oneroominfo,i) in roominfo" :key="oneroominfo">-->
-  <!--    <img :src="roominfo[i].image" class="room-img">-->
-  <!--    <h4>{{ roominfo[i].title }}</h4>-->
-  <!--    <p> {{ roominfo[i].price }} 원</p>-->
-  <!--  </div>-->
 
   <Card @openModal="modalchang = true;
         pushNum = $event "
         :oneroominfo="oneroominfo[i]"
         v-for="(roominfo,i) in oneroominfo" :key="roominfo"/>
-  <!--  <Card :oneroominfo="oneroominfo[1]"/>-->
-  <!--  <Card :oneroominfo="oneroominfo[2]"/>-->
-  <!--  <Card :oneroominfo="oneroominfo[3]"/>-->
-  <!--  <Card :oneroominfo="oneroominfo[4]"/>-->
-  <!--  <Card :oneroominfo="oneroominfo[5]"/>-->
-
-<!--    <div v-for="(roominfo,i) in oneroominfo" :key="i">-->
-<!--      <img :src="roominfo.image" class="room-img">-->
-<!--      <h4 v-on:click ="modalchang = true; pushNum = i" >{{ roominfo.title }}</h4>-->
-<!--      <p> {{ roominfo.price }} 원</p>-->
-<!--    </div>-->
-
 
 </template>
 
@@ -82,6 +47,9 @@ export default {
       oneroominfo: data,
       originalInfo : [...data], // 원본 데이터 카피
       pushNum: 0,
+
+      showDiscount : true,
+      discountPer : 30,
     }
   },
   methods: {
@@ -114,9 +82,7 @@ export default {
       })
     },
     priceFillter(){
-      this.oneroominfo = this.oneroominfo.filter(function(data) {
-        return data.price > 400000;
-      })
+      this.oneroominfo = this.oneroominfo.filter(data => {return data.price > 400000;})
     },
     sortBack(){
       // this.oneroominfo.sort(function(a,b){
@@ -126,6 +92,15 @@ export default {
       console.log([...this.originalInfo]);
       this.oneroominfo = [...this.originalInfo]; // array에서 =는값을 대입하는것이 아닌 값을 공유하는것
     }
+  },
+  mounted() {
+    setInterval(() => {
+      if(this.discountPer != 0){
+        this.discountPer = this.discountPer-1
+      }
+    },1000)
+
+
   },
   components: {
     Discount: discount,

@@ -37,18 +37,24 @@ export default {
       krErrType : "",
     }
   },
-  watch : {
-    month(data,hisData){
-      console.log(isNaN(data));
-      console.log(hisData + " => " + data);
-      // v-model 로만 사용했을 경우 inNaN을 이용하는게 좋다(글자 : true, 숫자 : false)
-      if(data >= 15){
-        alert("15이상 입력할 수 없습니다.");
-        this.month = hisData;
-      }else if(typeof data != 'number'){
-        alert("숫자만 입력 가능합니다.");
-        this.month = hisData;
-      }
+  // watch : {
+  //   month(data,hisData){
+  //     console.log(isNaN(data));
+  //     console.log(hisData + " => " + data);
+  //     // v-model 로만 사용했을 경우 inNaN을 이용하는게 좋다(글자 : true, 숫자 : false)
+  //     if(data >= 15){
+  //       alert("15이상 입력할 수 없습니다.");
+  //       this.month = hisData;
+  //     }else if(typeof data != 'number'){
+  //       alert("숫자만 입력 가능합니다.");
+  //       this.month = hisData;
+  //     }
+  //   }
+  // },
+  beforeUpdate() {
+    if(this.month > 3){
+      alert("3개월 이상은 하지 않습니다.");
+      this.month = 1;
     }
   },
   methods:{
