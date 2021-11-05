@@ -45,7 +45,7 @@ export default {
   opacity: 0;
 }
 .ani01-enter-active{
-  transition: all 2s;
+  transition: all 1s;
 }
 .ani01-enter-to{
   opacity: 1;
