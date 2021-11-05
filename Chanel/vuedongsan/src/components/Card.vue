@@ -1,9 +1,8 @@
 <template>
   <div>
-<!--    <img :src="product.image" class="room-img"/>-->
+    <img :src="product.image" class="room-img"/>
     <h4 @click="send">{{product.title}}</h4>
-    <p>{{ monIn }}개월 </p>
-    <p>{{ product.price * monIn }}원 </p>
+    <p>{{ product.price }}원 </p>
   </div>
 </template>
 
