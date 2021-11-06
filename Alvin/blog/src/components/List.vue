@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h5>{{ blogInfo.title }}</h5>
+  <div v-for="(blogInfo,i) in blog" :key="blogInfo">
+    <router-link to="/detail" v-on:click="$emit('detailIndex',i)">{{ blogInfo.title }}</router-link>
     <p>{{ blogInfo.date }}</p>
   </div>
 </template>
@@ -14,7 +14,7 @@ export default {
     }
   },
   props : {
-    blogInfo : Array,
+    blog : Array,
   }
 
 }

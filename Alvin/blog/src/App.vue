@@ -8,10 +8,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <router-link class="nav-link active" aria-current="page" to="/">Home</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <router-link class="nav-link" to="/list">List</router-link>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -35,16 +35,12 @@
       </div>
     </div>
   </nav>
-    <div class="container mt-5">
-      <h3>껍데기 개발자 탈피</h3>
-    </div>
-
-    <List :blogInfo="blogInfo"
-          v-for="blogInfo in blog" :key="blogInfo"/>
+  <router-view @detailIndex="detailIndex=$event" :blog="blog" :blogInfo="blog[detailIndex]"></router-view>
+<!--    <List :blogInfo="blogInfo" v-for="blogInfo in blog" :key="blogInfo"/>-->
 </template>
 
 <script>
-import List from './components/List.vue';
+// import List from './components/List.vue';
 import blogData from "./assets/js/blogData";
 
 export default {
@@ -52,10 +48,11 @@ export default {
   data(){
     return {
       blog : blogData,
+      detailIndex : 1,
     }
   },
   components: {
-    List : List,
+   // List : List,
   }
 }
 </script>
