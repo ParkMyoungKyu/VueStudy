@@ -2,20 +2,31 @@ import { createWebHistory, createRouter } from "vue-router";
 import List from '../components/List.vue';
 import Home from '../components/Home.vue';
 import ListDetail from '../components/Detail.vue';
-
+import Author from "../components/Author.vue";
+import Comment from "../components/Comment.vue"
 const routes =[
     // path 경로로 접근했을 경우 해당 component를 보여줘라
     {
-        path : "/list",
+        path : '/list',
         component : List,
     },
     {
-        path : "/",
+        path : '/',
         component : Home,
     },
     {
-        path: "/detail",
+        path: '/detail/:index',
         component : ListDetail,
+        children : [
+            {
+                path : 'comment',
+                component : Author,
+            },
+            {
+                path : 'author',
+                component : Comment,
+            },
+        ]
     },
 ];
 
