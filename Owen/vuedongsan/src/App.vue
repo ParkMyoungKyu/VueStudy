@@ -13,9 +13,15 @@
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
-<Discount/>
+<Discount v-if="showDiscount == true" />
 
-  
+
+
+<button @click="priceSort()">가격높은순정렬</button>
+<button @click="priceDeSort()">가격낮은순정렬</button>
+<button @click="nameSort()">가나다순정렬</button>
+<button @click="sortBack()" >되돌리기</button>
+
 <Card @openModal="모달창열렸니 = true; inputTitle = $event" :oneroom="onerooms[j]" v-for="(oneroom,j) in onerooms" :key="j"/>
 
 
@@ -29,14 +35,21 @@ import Discount from './Discount.vue';
 import Modal from './Modal.vue';
 import Card from './Card.vue';
 
+setTimeout(function(){
+  //실행할 코드
+
+})
+
 export default {
   name: 'App',
   data(){
     return {
+      showDiscount : true,
       objects : { name : 'kim', }, 
       //데이터 보관함
       inputTitle : 0,
       onerooms : data,
+      original : [...data], // 사본을 만드는 문법
       모달창열렸니 : false,
       신고수 : 0,
       신고수1 : 0,
@@ -56,8 +69,32 @@ export default {
     },
     increase2(){
       this.신고수2 += 1;
+    },
+    priceSort(){
+      this.onerooms.sort(function(a, b){
+        return a.price - b.price
+      })
+    },
+    priceDeSort(){
+      this.onerooms.sort(function(a, b){
+        return b.price - a.price
+      })
+    },
+    nameSort(){
+      this.onerooms.sort(function(a, b){
+        var fi = a.title;
+        var se = b.title;
+        return fi.charCodeAt(0) - se.charCodeAt(0);
+      })
+    },
+    sortBack(){
+      //this.onerooms = this.original;//값을 공유해주세요
+      this.onerooms = [...this.original];
     }
   },
+  // setInterval(() => {
+    
+  // }, interval);  
   components: {
     Discount : Discount,
     Modal : Modal,
