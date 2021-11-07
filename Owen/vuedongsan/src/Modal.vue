@@ -32,6 +32,7 @@ export default {
       month(a){
         // a 변경 후
         // b 변경 전
+        console.log("11111111111111");
         let w = a;
         alert(w);
         if (a >= 13){
