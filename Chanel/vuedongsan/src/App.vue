@@ -1,11 +1,12 @@
 <template>
+  <transition name="ani01">
   <Modal :product="products[selItem]" :popModal="popModal" @closeModal="popModal=$event;"/>
-  <base-input v-model="inputText" ></base-input>
+  </transition>
   <div class="menu">
     <a v-for="menu in menuList" :key="menu">{{menu}}</a>
   </div>
   <Discount />
-  <Card  v-for="(a,i) in products" :key="a" :product="products[i]" :monIn="inputText" @openModal="selectModal(i)"/>
+  <Card  v-for="(a,i) in products" :key="a" :product="products[i]" @openModal="selectModal(i)"/>
 </template>
 
 <script>
@@ -13,13 +14,11 @@ import data     from './assets/data/oneroom.js';
 import Discount from "./components/Discount";
 import Modal    from "./components/Modal";
 import Card     from "./components/Card";
-import MonInput from "./components/MonInput";
 
 export default {
   name: 'App',
   data() {
     return {
-      inputText : 1,
       selItem : 0,
       popModal : false,
       sin_cnt : [0,0,0],
@@ -34,7 +33,6 @@ export default {
     },
   },
   components: {
-    'base-input' : MonInput,
     Card,
     Modal,
     Discount : Discount,
@@ -43,6 +41,24 @@ export default {
 </script>
 
 <style>
+.ani01-enter-from {
+  opacity: 0;
+}
+.ani01-enter-active{
+  transition: all 1s;
+}
+.ani01-enter-to{
+  opacity: 1;
+}
+.ani01-leave-from {
+  opacity: 1;
+}
+.ani01-leave-active{
+  transition: all 2s;
+}
+.ani01-leave-to{
+  opacity: 0;
+}
 body {
   margin : 0;
 }

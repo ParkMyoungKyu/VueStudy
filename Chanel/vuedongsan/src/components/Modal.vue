@@ -24,6 +24,14 @@ export default {
       month : 1,
     }
   },
+  watch : {
+    month(a,b) {
+      if(isNaN(a)) {
+        alert("숫자만");
+        this.month = b;
+      }
+    }
+  },
   methods : {
   },
 }
