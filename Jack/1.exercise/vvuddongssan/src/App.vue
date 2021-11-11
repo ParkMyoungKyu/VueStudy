@@ -1,6 +1,8 @@
 <template>
 
-  <Modal @hideDetail="hideDetail()" :isVisibleModal="isVisibleModal" :selectedItem="selectedItem"/>
+  <transition name="fade">
+    <Modal @hideDetail="hideDetail()" :isVisibleModal="isVisibleModal" :selectedItem="selectedItem"/>
+  </transition>
 
   <div class="menu">
     <a>Home</a>
@@ -8,7 +10,12 @@
     <a>About</a>
   </div>
 
-  <Discount/>
+  <Discount v-if="isVisibleDiscount"/>
+
+  <p>
+    <button @click="priceSort()">가격순정렬</button>
+    <button @click="undoSort()">되돌리기</button>
+  </p>
 
   <Card @showDetail="showDetail($event)" :rooms="rooms" :roomStyle="roomStyle" :priceStyle="priceStyle"/>
 
@@ -27,10 +34,12 @@ export default {
   data(){
     return {
       isVisibleModal : false,
+      isVisibleDiscount : true,
       roomStyle : 'color:blue',
       priceStyle : 'color:red',
       selectedItem : {},
-      rooms : roomList
+      rooms : roomList,
+      roomsOrigin : [...roomList]
     }
   },
   methods:{
@@ -43,6 +52,12 @@ export default {
     },
     hideDetail(){
       this.isVisibleModal = false;
+    },
+    priceSort(){
+      this.rooms.sort((a,b) => a.price - b.price);
+    },
+    undoSort(){
+      this.rooms = [...this.roomsOrigin];
     }
   },
   components: {
@@ -107,4 +122,27 @@ img.roomImg {
   margin: 10px;
   border-radius: 10px;
 }
+
+.fade-enter-from {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: all 0.5s;
+}
+.fade-enter-to {
+  opacity: 1;
+}
+
+.fade-leave-from {
+  transform: translateY(-1000px);
+  opacity: 1;
+}
+.fade-leave-active {
+  transition: all 0.5s;
+}
+.fade-leave-to {
+  transform: translateY(0px);
+  opacity: 0;
+}
+
 </style>
