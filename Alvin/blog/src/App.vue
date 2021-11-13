@@ -48,7 +48,7 @@ export default {
   data(){
     return {
       blog : blogData,
-      detailIndex : 1,
+      detailIndex : '',
     }
   },
   components: {

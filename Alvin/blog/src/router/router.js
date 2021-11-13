@@ -34,5 +34,8 @@ const router = createRouter({
     history : createWebHistory(),
     routes, // 상단에 routes 라는 변수를 사용하겠다는것
 })
-
+router.beforeEach((to,from) => {
+    console.log("이동전 URL : " + from.fullPath);
+    console.log("이동후 URL : "+to.fullPath);
+})
 export default router;
