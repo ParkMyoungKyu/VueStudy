@@ -14,7 +14,7 @@
               <router-link class="nav-link active" to="/recent">최신차트</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">장르 콜렉션</a>
+              <router-link class="nav-link" to="/category">장르 콜렉션</router-link>
             </li>
             <li class="nav-item">
               <a class="nav-link disabled">보관함</a>
@@ -50,6 +50,7 @@ export default {
   name: 'App',
   data(){
     return{
+
     }
   },
   components: {

@@ -1,13 +1,108 @@
 <template>
-  <div class="p-3 mb-2 bg-info text-dark text-center">장르 콜렉션</div>
+    <div class="text-center collection ">
+      <img v-on:click="chartList(chart.id)" class="category rounded-circle" :src="chart.imgList[0].url"  v-for="chart in categoryList" :key="chart">
+  </div>
+  <div class="upload-image">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col" style="text-align: center; width: 60px">순위</th>
+          <th scope="col" style="width: 60px"></th>
+          <th scope="col" style="width: 750px">곡/앨범</th>
+          <th scope="col" style="width: 250px">아티스트</th>
+          <th scope="col" style="text-align: center">듣기</th>
+          <th scope="col" style="text-align: center">더보기</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(list,i) in categoryChartList" :key="list" style="height: 92px">
+          <th scope="row" class="text-center" style="padding: 30px 0;">
+            {{ i+1 }}
+          </th>
+          <th scope="row" class="text-center" style="padding: 30px 0;">
+          <span v-if="list.rank.rankBadge > 0" style="color: red;">
+            ▲ {{list.rank.rankBadge}}
+          </span>
+            <span v-if="list.rank.rankBadge < 0" style="color: blue;">
+            ▼ {{list.rank.rankBadge}}
+          </span>
+          </th>
+          <td>
+            <div style="position: absolute">
+              <img :src="list.album.imgList[0].url" style="border-radius: 5px;">
+            </div>
+            <div style="padding:12px 28px 0px 90px;">
+              <span style="font-weight: bold">{{list.name}}</span><br>
+              <span style="font: menu;">{{list.album.title}}</span>
+            </div>
+          </td>
+          <td style="padding: 30px 0;">
+            <div class="text-truncate" style="max-width: 300px;">
+          <span v-for="(artist,v) in list.artistList" :key="artist">
+            <span v-if="v > 0"> & </span>
+            {{artist.name}}
+          </span>
+            </div>
+          </td>
+          <td style="padding: 30px 0; text-align: center">
+            듣기
+          </td>
+          <td style="text-align: center">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  name: "Category"
+  name: "Category",
+  data(){
+    return {
+      categoryList : "",
+      categoryChartList : "",
+    }
+  },
+  created() {
+    const url = 'https://www.music-flo.com/api/personal/v1/preferences/genres?timestamp=1636872465944';
+    axios.get(url)
+    .then(data=>{
+      console.log(data.data.data.list);
+      this.categoryList = data.data.data.list;
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  },
+  methods:{
+    chartList(id){
+      const url = 'https://www.music-flo.com/api/meta/v1/chart/track/'+id+'?timestamp=1636874439905';
+      axios.get(url)
+      .then(data=>{
+        console.log(data.data.data.trackList);
+        this.categoryChartList = data.data.data.trackList;
+      })
+      .catch(err => {
+          console.log(err);
+      })
+    }
+  }
 }
 </script>
 
 <style>
+.collection{
+}
+.category {
+  width: 180px;
+  height: 180px;
+  margin: 20px 0;
+  padding: 8px;
 
+  display: inline-block;
+  color : white;
+  background-size: cover;
+}
 </style>

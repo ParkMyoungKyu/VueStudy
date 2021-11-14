@@ -61,9 +61,9 @@
         듣기
       </td>
       <td style="text-align: center">
-        <div>곡정보</div>
-        <div>아티스트 정보</div>
-        <div>앨범정보</div>
+<!--        <div>곡정보</div>-->
+<!--        <div>아티스트 정보</div>-->
+<!--        <div>앨범정보</div>-->
       </td>
     </tr>
     </tbody>
