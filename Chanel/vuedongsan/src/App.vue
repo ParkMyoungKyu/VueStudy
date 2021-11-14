@@ -5,7 +5,8 @@
   <div class="menu">
     <a v-for="menu in menuList" :key="menu">{{menu}}</a>
   </div>
-  <Discount />
+  <Discount :disCnt = "disCnt" v-if="showDiscount == true"/>
+  <button @click="priceSort()">가격순정렬</button> <button @click="backSort()">되돌리기</button>
   <Card  v-for="(a,i) in products" :key="a" :product="products[i]" @openModal="selectModal(i)"/>
 </template>
 
@@ -24,6 +25,9 @@ export default {
       sin_cnt : [0,0,0],
       menuList : ['Home', 'Products', "About"],
       products : data,
+      productsOrg : [...data],
+      disCnt : 10,
+      showDiscount: true,
     }
   },
   methods : {
@@ -31,6 +35,20 @@ export default {
       this.selItem = tId;
       this.popModal = true;
     },
+    priceSort() {
+      this.products.sort(function (a,b) {
+        return a.price - b.price;
+      })
+    },
+    backSort() {
+      this.products = [...this.productsOrg];
+    },
+  },
+  mounted() {
+    setInterval(()=> {
+      if(this.disCnt > 0) this.disCnt--;
+      else this.showDiscount = false;
+    }, 1000);
   },
   components: {
     Card,

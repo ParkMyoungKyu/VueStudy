@@ -4,8 +4,8 @@
       <img :src="product.image" style="width: 100%" />
       <h4>{{ product.title }}</h4>
       <p>{{ product.content }}</p>
-      <input name="iMonths" v-model="month">
-      <p> {{month}} 개월 {{ product.price * month}}원</p>
+      <input v-model="month">
+      <p> {{ product.price }} 원 * {{month}} 개월 = {{ product.price * month}}원</p>
       <button @click="$emit('closeModal', false)">닫기</button>
     </div>
   </div>
@@ -21,7 +21,7 @@ export default {
   },
   data() {
     return {
-      month : 1,
+      month : 6,
     }
   },
   watch : {
@@ -30,6 +30,12 @@ export default {
         alert("숫자만");
         this.month = b;
       }
+    }
+  },
+  beforeUpdate() {
+    if((this.month % 6) > 0) {
+      alert("6개월 단위로만 가능");
+      this.month = 6;
     }
   },
   methods : {
