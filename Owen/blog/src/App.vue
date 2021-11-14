@@ -8,10 +8,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="#"><router-link to="/">홈페이지</router-link></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="#"><router-link to="/list">리스트페이지</router-link></a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -35,14 +35,25 @@
     </div>
   </div>
 </nav>
-  
+
+
+<router-view :블로그글="블로그글"></router-view>
+
+<!-- <List :블로그글="블로그글"/> -->
+
 </template>
 
 <script>
-
+// import List from './components/List.vue'
+import blog from './assets/blog.js'
 
 export default {
   name: 'App',
+  data(){
+    return {
+      블로그글 : blog 
+    }
+  },
   components: {
     
   }
