@@ -17,7 +17,7 @@
               <router-link class="nav-link" to="/category">장르 콜렉션</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled">보관함</a>
+              <router-link class="nav-link" to="/myList">장르 보관함</router-link>
             </li>
           </ul>
           <form class="d-flex">
