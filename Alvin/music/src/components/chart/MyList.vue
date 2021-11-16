@@ -12,18 +12,28 @@
       <input @change="upload" type="file" accept="image/*"  id="file3"  style="display:none;">
       <label for="file3" class="nav-fill">이미지 파일올리기</label>
     </div>
+    <div class="btn btn-outline-dark ms-4">
+      <input @click="axiosUpload" type="text"  id="file4"  style="display:none;">
+      <label for="file4" class="nav-fill">axios 이미지 올리기</label>
+    </div>
     <div v-for="img_list in img" :key="img_list">
       <div class="img-area" v-bind:style="`background-image:url(${img_list})`"></div>
+    </div>
+    <div v-for="img_list in axiosImg" :key="img_list">
+      <div class="img-area" v-bind:style="`background-image:url(${img_list.imgList[2].url})`"></div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "MyList",
   data(){
     return{
       img : [],
+      axiosImg : "",
       style : { b_img:'background-img:none', width: 'width:300px', height: 'height:300px', margin:'margin: 50px auto'},
     }
   },
@@ -36,7 +46,19 @@ export default {
         console.log(url);
         this.img.push(url);
       }
+    },
+    axiosUpload(){
+      let url = 'https://www.music-flo.com/api/meta/v1/album/ALL/new?timestamp=1636793296472';
+      axios.get(url)
+      .then(data => {
+        console.log(data.data.data.list);
+        this.axiosImg = data.data.data.list;
+      })
+      .catch(err =>{
+          console.log(err);
+      })
     }
+
   }
 }
 </script>
