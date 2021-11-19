@@ -21,7 +21,9 @@
     </div>
 
     <div v-if="show">
-      <FilterBox v-bind:img="img" v-bind:filters="filters"/>
+      <FilterBox v-bind:img="img" v-bind:filters="filters">
+        <template v-slot:default="slotCome">{{slotCome.slotData}}</template>
+      </FilterBox>
     </div>
 
     <div v-for="img_list in axiosImg" :key="img_list">

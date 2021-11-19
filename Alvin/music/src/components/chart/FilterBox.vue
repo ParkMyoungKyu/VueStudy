@@ -1,5 +1,6 @@
 <template>
   <div style="display: inline-flex" :class="filter + ' filter-01'" v-for="filter in filters" :key="filter" :style="`background-image: url(${img})`">
+    <slot :slotData="resultCode"></slot>
     {{ filter }}
   </div>
 </template>
@@ -9,7 +10,7 @@ export default {
   name: "FilterBox",
   data(){
     return{
-
+      resultCode : "난 자식에서 왔어"
     }
   },
   props:{
