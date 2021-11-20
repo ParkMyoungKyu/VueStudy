@@ -28,7 +28,7 @@
       </div>
     </nav>
   </div>
-
+  <div style="text-align: center">{{ $store.state.VuexData }}</div>
   <div>
     <router-view></router-view>
     <!--  <List :todayChart="todayChart"/>-->

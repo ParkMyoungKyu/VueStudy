@@ -17,12 +17,13 @@
       <label for="file4" class="nav-fill">axios 이미지 올리기</label>
     </div>
     <div v-for="img_list in img" :key="img_list">
-      <div class="img" v-bind:style="`background-image:url(${img_list})`"></div>
+      <div :class="clickFilter" class="img" v-bind:style="`background-image:url(${img_list})`"></div>
     </div>
 
     <div v-if="show">
       <FilterBox v-bind:img="img" v-bind:filters="filters">
-        <template v-slot:default="slotCome">{{slotCome.slotData}}</template>
+        <template v-slot:a>{{tranSon}}</template>
+        <template v-slot:default="resultCode">{{resultCode.resultCode}}</template>
       </FilterBox>
     </div>
 
@@ -40,13 +41,15 @@ export default {
   name: "MyList",
   data(){
     return{
+      tranSon : "난 부모에서 왔어",
       img : [],
       axiosImg : "",
       show : false,
       style : { b_img:'background-img:none', width: 'width:300px', height: 'height:300px', margin:'margin: 50px auto'},
       filters : [ "aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson",
         "inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua",
-        "reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"]
+        "reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"],
+      clickFilter : "",
     }
   },
   methods:{
@@ -75,7 +78,13 @@ export default {
   },
   components:{
     FilterBox,
-  }
+  },
+  mounted() {
+    this.emitter.on('filterTran',(data)=>{
+      console.log(data);
+      this.clickFilter = data;
+    });
+  },
 }
 </script>
 
