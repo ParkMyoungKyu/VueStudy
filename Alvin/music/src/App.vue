@@ -28,7 +28,10 @@
       </div>
     </nav>
   </div>
-  <div style="text-align: center">{{ $store.state.VuexData }}</div>
+  <div style="text-align: center; margin: 20px 0px">
+    <button class="btn btn-outline-dark me-2" @click="$store.commit('updateData')">{{ $store.state.VuexData }}</button>
+    <button class="btn btn-outline-dark me-2" @click="$store.commit('versionUpgrade')"> {{ $store.state.MyVersion.toFixed(1) }} ver</button>
+  </div>
   <div>
     <router-view></router-view>
     <!--  <List :todayChart="todayChart"/>-->
