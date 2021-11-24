@@ -8,8 +8,8 @@
             <div class="card shadow-sm" v-if="i < 10">
               <img :src="list.imgList[5].url" class="bd-placeholder-img card-img-top" width="100%" :alt="list.imgList[5].url">
               <div class="card-body">
-                <p class="card-title text-black fs-5">{{list.title}}</p>
-                <p class="card-text text-black-50 fs-6">{{list.artistList[0].name}}</p>
+                <p class="card-title text-black" style="font-size: 15px">{{list.title}}</p>
+                <p class="card-text text-black-50" style="font-size: 13px">{{list.artistList[0].name}}</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <button type="button" class="btn btn-sm btn-outline-secondary">듣기</button>
@@ -19,6 +19,25 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="col" v-for="(list,i) in $store.state.dataMore" :key="list">
+            <div class="card shadow-sm" v-if="i >= 10">
+              <img :src="list.imgList[5].url" class="bd-placeholder-img card-img-top" width="100%" :alt="list.imgList[5].url">
+              <div class="card-body">
+                <p class="card-title text-black" style="font-size: 15px">{{list.title}}</p>
+                <p class="card-text text-black-50" style="font-size: 13px">{{list.artistList[0].name}}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">듣기</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">담기</button>
+                  </div>
+                  <small class="text-muted"></small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="text-align: center; margin: 20px auto">
+            <button class="btn btn-outline-dark me-2" @click="$store.dispatch('getData')" style="width: 200px">더보기</button>
           </div>
         </div>
       </div>
