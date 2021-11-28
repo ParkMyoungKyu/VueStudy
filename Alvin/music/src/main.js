@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import router from './router/router.js'
 import mitt from 'mitt';
 import store from './store/store.js'
+import './registerServiceWorker'
 
 let emitter = mitt();
 let app = createApp(App);
