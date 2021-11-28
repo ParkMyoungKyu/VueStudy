@@ -2,13 +2,13 @@
   <div class="post">
     <div class="post-header">
       <div class="profile"></div>
-      <span class="profile-name">ChanKim</span>
+      <span class="profile-name">{{instarData.name}}</span>
     </div>
-    <div class="post-body"></div>
+    <div class="post-body" :style="{backgroundImage : `url(${instarData.postImage})`}"></div>
     <div class="post-content">
-      <p>43 Likes</p>
-      <p><strong>글쓴이아이디</strong> 임시내용</p>
-      <p class="date">May 15</p>
+      <p>{{instarData.likes}} Likes</p>
+      <p><strong>{{instarData.name}}</strong> {{instarData.content}}</p>
+      <p class="date">{{instarData.date}}</p>
     </div>
 </div> 
 </template>

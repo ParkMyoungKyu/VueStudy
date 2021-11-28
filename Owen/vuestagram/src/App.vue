@@ -9,25 +9,34 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :instarData="instarData" />
+  <Container :instarData="instarData" :step="step" />
+  <button @click="more">더보기</button>
+
   <div class="footer">
     <ul class="footer-button-plus">
       <input type="file" id="file" class="inputfile" />
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
+
+  
+  <div style="margin-top : 500px"></div>
+
 </template>
 
 <script>
 import Container from './components/Container.vue'
 import instarData from './assets/guestList.js'
+import axios from 'axios'
+axios.post()
 
 export default {
   name: "App",
   data(){
     return {
+      step : 1,
       instarData : instarData,
- 
+      count : 0
     }
   },
   components: { 
@@ -35,6 +44,17 @@ export default {
   },
   props :{
     onerooms : Array,
+  },
+  methods: {
+    more(){
+      
+      axios.get('https://codingapple1.github.io/vue/more'+this.count+'.json')
+      .then((result)=>{
+        console.log(result.data);
+        this.instarData.push(result.data);
+      })
+      this.count++;
+    },
   },
 };
 </script>
