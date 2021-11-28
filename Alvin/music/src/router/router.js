@@ -6,7 +6,7 @@ import MyList from "../components/chart/MyList.vue";
 
 const routes =[
     {
-        path : '/',
+        path : '/music',
         component : List,
     },
     {

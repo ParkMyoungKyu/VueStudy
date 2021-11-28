@@ -7,5 +7,5 @@ module.exports = {
             exclude: [/\.map$/, /manifest\.json$/, 'index.html']
         }
     },
-    // publicPath:'/music', // 서브경로
+    publicPath:'/music', // 서브경로
 }
