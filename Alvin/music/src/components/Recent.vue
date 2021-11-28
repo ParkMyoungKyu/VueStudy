@@ -102,6 +102,7 @@ export default {
   },
   created() {
     console.log("===== created =====");
+    // data는 beforeCreate때가 아닌 created일때 갖고올 수 있다
     const url = 'https://www.music-flo.com/api/display/v1/browser/chart/1/track/list?size='+this.endChart+'&timestamp=1636788179275';
     axios.get(url)
         .then( data => {
