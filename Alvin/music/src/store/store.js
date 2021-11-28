@@ -39,6 +39,13 @@ const store = createStore({
                 console.log(e);
             })
         }
+    },
+    getters:{
+        updateData2(state){
+            if(state.VuexData == "Vuex 수정") state.VuexData = "Vuex 데이터"
+            else state.VuexData = "Vuex 수정"
+
+        },
     }
 })
 

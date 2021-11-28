@@ -37,7 +37,7 @@
             </div>
           </div>
           <div style="text-align: center; margin: 20px auto">
-            <button class="btn btn-outline-dark me-2" @click="$store.dispatch('getData')" style="width: 200px">더보기</button>
+            <button class="btn btn-outline-dark me-2" @click="getData" style="width: 200px">더보기</button>
           </div>
         </div>
       </div>
@@ -47,6 +47,7 @@
 
 <script>
 import axios from "axios";
+import {mapActions} from 'vuex';
 export default {
   name: "Today",
   data(){
@@ -56,9 +57,14 @@ export default {
   },
   props : {
   },
+  methods:{
+    ...mapActions(["getData"])
+  },
   beforeMount() {
     axios.get('https://www.music-flo.com/api/meta/v1/album/ALL/new?timestamp=1636793296472')
     .then(data => {
+      console.log("======================");
+      console.log(data.data.data.list);
       this.todayList = data.data.data.list;
     })
   }

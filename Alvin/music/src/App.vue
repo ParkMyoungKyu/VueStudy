@@ -29,8 +29,10 @@
     </nav>
   </div>
   <div style="text-align: center; margin: 20px 0px">
-    <button class="btn btn-outline-dark me-2" @click="$store.commit('updateData')">{{ $store.state.VuexData }}</button>
-    <button class="btn btn-outline-dark me-2" @click="$store.commit('versionUpgrade')"> {{ $store.state.MyVersion.toFixed(1) }} ver</button>
+    <button class="btn btn-outline-dark me-2" @click="updateData">{{ VuexData }}</button>
+    <button class="btn btn-outline-dark me-2" @click="versionUpt"> {{ MyVersion.toFixed(1) }} ver</button>
+    <button class="btn btn-outline-dark me-2" @click="$store.mutations.updateData"> {{ VuexData }}</button>
+    <p>{{data}}</p>
   </div>
   <div>
     <router-view></router-view>
@@ -47,14 +49,27 @@
 </template>
 
 <script>
-
+import {mapState, mapMutations} from 'vuex';
 
 export default {
   name: 'App',
   data(){
     return{
-
+      count : 1,
     }
+  },
+  methods:{
+    ...mapMutations(['updateData']),
+    ...mapMutations({versionUpt:'versionUpgrade'}),
+    data2(){
+      return new Date();
+    }
+  },
+  computed:{
+    data(){
+      return this.$store.state.VuexData;
+    },
+    ...mapState(['VuexData','MyVersion']),
   },
   components: {
   },
