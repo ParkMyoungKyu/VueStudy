@@ -4,17 +4,18 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li v-if="step == 1" @click="step++">Next</li>
+      <li v-if="step == 2" @click="publish">발행</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :instarData="instarData" :step="step" />
+  <Container :이미지="이미지" :instarData="instarData" :step="step" />
   <button @click="more">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+      <input @change="upload" accept="image/*" type="file" id="file" class="inputfile" />
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
@@ -34,9 +35,10 @@ export default {
   name: "App",
   data(){
     return {
-      step : 1,
+      step : 0,
       instarData : instarData,
-      count : 0
+      count : 0,
+      이미지 : '',
     }
   },
   components: { 
@@ -55,6 +57,28 @@ export default {
       })
       this.count++;
     },
+    upload(e){
+      let uploadFile = e.target.files;
+      console.log(uploadFile[0]);
+      let url = URL.createObjectURL(uploadFile[0]);
+      console.log(url);
+      this.이미지 = url;
+      this.step = 1;
+    },
+    publish(){
+      var 내게시물 = {
+        name: "Kim Hyun",
+        userImage: "https://placeimg.com/100/100/arch",
+        postImage: "https://placeimg.com/640/480/arch",
+        likes: 36,
+        date: "May 15",
+        liked: false,
+        content: "오늘 무엇을 했냐면요 아무것도 안했어요 😫",
+        filter: "perpetua"
+      };
+      this.instarData.unshift(내게시물);
+      this.step = 0;
+    }
   },
 };
 </script>
