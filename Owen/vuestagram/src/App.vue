@@ -10,7 +10,7 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :이미지="이미지" :instarData="instarData" :step="step" />
+  <Container @write="작성한글 = $event" :이미지="이미지" :imagefilter="imagefilter" :instarData="instarData" :step="step" />
   <button @click="more">더보기</button>
 
   <div class="footer">
@@ -39,7 +39,14 @@ export default {
       instarData : instarData,
       count : 0,
       이미지 : '',
+      imagefilter:'',
     }
+  },
+  mounted(){
+    this.emitter.on('작명', (a)=>{
+      //이코드를 실행해 주세요
+      this.imagefilter = a
+    })
   },
   components: { 
     Container : Container,
@@ -69,11 +76,11 @@ export default {
       var 내게시물 = {
         name: "Kim Hyun",
         userImage: "https://placeimg.com/100/100/arch",
-        postImage: "https://placeimg.com/640/480/arch",
+        postImage: this.이미지,
         likes: 36,
         date: "May 15",
         liked: false,
-        content: "오늘 무엇을 했냐면요 아무것도 안했어요 😫",
+        content: this.작성한글,
         filter: "perpetua"
       };
       this.instarData.unshift(내게시물);
