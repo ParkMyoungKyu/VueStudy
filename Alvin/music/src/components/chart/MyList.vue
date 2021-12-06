@@ -30,13 +30,14 @@
     <div v-for="img_list in axiosImg" :key="img_list">
       <div class="img-area rounded-pill" v-bind:style="`background-image:url(${img_list.imgList[2].url})`"></div>
     </div>
+    <MyPage/>
   </div>
 </template>
 
 <script>
 import FilterBox from '../chart/FilterBox.vue';
 import axios from "axios";
-
+import MyPage from "../MyPage.vue";
 export default {
   name: "MyList",
   data(){
@@ -78,6 +79,7 @@ export default {
   },
   components:{
     FilterBox,
+    MyPage,
   },
   mounted() {
     this.emitter.on('filterTran',(data)=>{

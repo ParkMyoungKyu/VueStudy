@@ -5,7 +5,6 @@
     <div>
       <button class="btn btn-outline-light" style="width: 200px; height: 200px; opacity: 70%" @click="fire(filter)">{{ filter }}</button>
     </div>
-
   </div>
 </template>
 
